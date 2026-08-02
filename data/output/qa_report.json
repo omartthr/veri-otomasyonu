@@ -1,0 +1,61 @@
+{
+  "total_universities": 16,
+  "programs_per_university": {
+    "Asbury Theological Seminary": 26,
+    "Asbury University": 25,
+    "Berea College": 1,
+    "Clear Creek Baptist Bible College": 14,
+    "Frontier Nursing University": 8,
+    "Galen College of Nursing-Louisville": 2,
+    "Kentucky Christian University": 41,
+    "Lexington Theological Seminary": 14,
+    "Louisville Presbyterian Theological Seminary": 10,
+    "Midway University": 16,
+    "Simmons College of Kentucky": 6,
+    "Sullivan University": 16,
+    "The Southern Baptist Theological Seminary": 80
+  },
+  "rejected_candidates_count": 158,
+  "rejection_reasons": {
+    "doğrulanmış program adı yok": 82,
+    "taksonomi reddi (PROGRAM_LIST)": 6,
+    "sayfa içeriği indirilemedi": 62,
+    "program adı=6, yetersiz içerik": 2,
+    "taksonomi reddi (CATALOG)": 6
+  },
+  "duplicate_count": 0,
+  "junk_program_names_count": 0,
+  "official_program_source_ratio": 1.0,
+  "name_and_url_only_count": 31,
+  "duration_fill_rate": 0.06563706563706563,
+  "tuition_fill_rate": 0.5482625482625483,
+  "admission_fill_rate": 0.08108108108108109,
+  "language_fill_rate": 0.05791505791505792,
+  "historical_source_count": 0,
+  "fake_derived_count": 0,
+  "fill_rates_by_field": {
+    "Eğitim Süresi": 0.06563706563706563,
+    "Yıllık Ücret": 0.5482625482625483,
+    "Minimum GPA": 0.08108108108108109,
+    "Minimum IELTS": 0.05791505791505792,
+    "Minimum TOEFL": 0.0,
+    "Essay Gerekli Mi": 0.007722007722007722,
+    "Mülakat Gerekli Mi": 0.10810810810810811,
+    "Kabul Verisi Kaynağı": 0.5907335907335908,
+    "Başvuru Belgeleri": 0.44015444015444016,
+    "Zorunlu Başvuru Maddeleri": 0.38223938223938225,
+    "Başvuru Dönemi": 0.36293436293436293,
+    "Son Başvuru Metni": 0.43243243243243246,
+    "İngilizce Yeterlilik Gerekli Mi": 0.5482625482625483,
+    "Standart Test Politikası": 0.6332046332046332,
+    "Transkript/GED Gereksinimi": 0.6795366795366795,
+    "Fakülte": 0.6640926640926641,
+    "Eğitim Dili": 0.5714285714285714
+  },
+  "empty_source_url_count": 0,
+  "passed_qa": true,
+  "failure_reasons": [],
+  "warning_reasons": [
+    "[Kural 1] Düşük doluluk oranı: Eğitim Süresi doluluk: %7; Minimum GPA doluluk: %8"
+  ]
+}
