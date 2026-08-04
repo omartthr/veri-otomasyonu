@@ -1,37 +1,25 @@
 {
   "schema_version": "program-quality-v3",
   "completed_universities": [
-    "Asbury Theological Seminary",
-    "Asbury University",
-    "Berea College",
-    "Clear Creek Baptist Bible College",
-    "Frontier Nursing University",
-    "Galen College of Nursing-Louisville",
-    "Kentucky Christian University",
-    "Lexington Theological Seminary",
-    "Louisville Presbyterian Theological Seminary",
-    "Midway University",
-    "Simmons College of Kentucky",
-    "Sullivan University",
-    "The Southern Baptist Theological Seminary"
+    "Bellevue University",
+    "Chadron State College",
+    "College of Saint Mary",
+    "Doane University",
+    "Nebraska Methodist College",
+    "Nebraska Methodist College of Nursing & Allied Health",
+    "Nebraska Wesleyan University"
   ],
   "failed_universities": {},
   "program_counts": {
-    "Asbury Theological Seminary": 26,
-    "Asbury University": 25,
-    "Berea College": 1,
-    "Clear Creek Baptist Bible College": 14,
-    "Frontier Nursing University": 8,
-    "Galen College of Nursing-Louisville": 2,
-    "Kentucky Christian University": 41,
-    "Lexington Theological Seminary": 14,
-    "Louisville Presbyterian Theological Seminary": 10,
-    "Midway University": 16,
-    "Simmons College of Kentucky": 6,
-    "Sullivan University": 16,
-    "The Southern Baptist Theological Seminary": 80
+    "Bellevue University": 3,
+    "Chadron State College": 60,
+    "College of Saint Mary": 32,
+    "Doane University": 34,
+    "Nebraska Methodist College": 12,
+    "Nebraska Methodist College of Nursing & Allied Health": 12,
+    "Nebraska Wesleyan University": 17
   },
-  "last_saved_output": "C:\\Users\\lenovo\\Downloads\\uni-veri-otomasyonu-kalite-guncellemesi-final\\uni-veri-otomasyonu-kalite-guncellemesi\\data\\output\\template_united_states_of_america_kentucky_university_country_review_programlar_doldurulmus.xlsx",
-  "started_at": "2026-08-02T10:59:22.462009",
-  "updated_at": "2026-08-02T11:31:19.442707"
+  "last_saved_output": "C:\\Users\\lenovo\\Downloads\\veri-otomasyonu\\veri-otomasyonu\\data\\output\\template_united_states_of_america_nebraska_university_country_review_programlar_doldurulmus.xlsx",
+  "started_at": "2026-08-02T23:19:02.230342",
+  "updated_at": "2026-08-02T23:37:04.595275"
 }
