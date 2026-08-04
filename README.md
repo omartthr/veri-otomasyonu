@@ -13,7 +13,7 @@
 
 **Üniversite Veri Otomasyonu**, yüklenen kaynak Excel dosyalarındaki üniversitelerin resmî web sitelerini, sitemap haritalarını ve akademik katalog PDF'lerini derinlemesine tarayarak, eksik kabul kuralları, program detayları, yabancı dil yeterlilikleri, eğitim ücretleri ve sürelerini otomatik olarak tespit eder.
 
-Eski versiyonlarda kullanılan **maliyetli ve uydurma (hallucination) riski taşıyan yapay zekâ (LLM) API entegrasyonları tamamen devre dışı bırakılmıştır.** Sistem artık **%100 deterministik kural ve RegEx motorlarıyla**, açık **kanıt (quote) cümlesi barındıran** verileri derler. Toplanan tüm bilgiler 8 aşamalı sert kalite kapısından (Hard QA Gate) geçtikten sonra, orijinal Excel dosyasının hücresel stiline ve renklerine zerre kadar zarar vermeden **48 sütunlu** hassas çıktı biçiminde üretime aktarılır.
+Sistem **%100 deterministik kural ve RegEx motorlarıyla**, açık **kanıt (quote) cümlesi barındıran** verileri derler. Toplanan tüm bilgiler 8 aşamalı sert kalite kapısından (Hard QA Gate) geçtikten sonra, orijinal Excel dosyasının hücresel stiline ve renklerine zerre kadar zarar vermeden **48 sütunlu** hassas çıktı biçiminde üretime aktarılır.
 
 ---
 
