@@ -103,6 +103,37 @@ def _save_session_results() -> Path:
     return saved_path
 
 
+# ─────────────────── Yardımcı: Güvenli Tablo Renderer ───────────────────
+
+def _render_table(data: list[dict], height: int = 400) -> None:
+    """st.dataframe() yerine pandas/pyarrow gerektirmeyen HTML tablo renderer.
+    Windows App Control ortamında st.dataframe() ve st.table() pyarrow DLL yükler
+    ve engellenir; bu fonksiyon saf HTML ile çalışır."""
+    if not data:
+        st.info("Gösterilecek veri yok.")
+        return
+    headers = list(data[0].keys())
+    rows_html = ""
+    for row in data:
+        cells = "".join(
+            f"<td style='padding:4px 10px;border:1px solid #333;white-space:nowrap;'>{row.get(h, '')}</td>"
+            for h in headers
+        )
+        rows_html += f"<tr>{cells}</tr>"
+    header_html = "".join(
+        f"<th style='padding:6px 10px;border:1px solid #444;background:#1e1e2e;text-align:left;'>{h}</th>"
+        for h in headers
+    )
+    table_html = (
+        f"<div style='overflow:auto;max-height:{height}px;'>"
+        f"<table style='border-collapse:collapse;font-size:0.85em;width:100%;'>"
+        f"<thead><tr>{header_html}</tr></thead>"
+        f"<tbody>{rows_html}</tbody>"
+        f"</table></div>"
+    )
+    st.markdown(table_html, unsafe_allow_html=True)
+
+
 # ─────────────────── Ana Arayüz ───────────────────
 
 def main():
@@ -128,7 +159,8 @@ def main():
             "Mod Seç",
             options=[
                 "🔍 URL Bulma",
-                "📋 Program Verilerini Doldurma",
+                "📋 Program Verilerini Doldurma (v1 — Boş Şablon)",
+                "⚡ Program Verilerini Doldurma (v2 — Dolu Excel Eksik Sütunlar)",
                 "🔍+📋 URL Bul + Program Doldur",
             ],
             index=0,
@@ -143,20 +175,28 @@ def main():
         _render_research_tab(tab_research, settings)
         _render_manual_tab(tab_manual)
 
-    elif work_mode == "📋 Program Verilerini Doldurma":
+    elif work_mode == "📋 Program Verilerini Doldurma (v1 — Boş Şablon)":
         tab_prog, tab_prog_manual = st.tabs([
-            "📋 Program Verilerini Doldur", "🛠️ Program Manuel İnceleme"
+            "📋 Program Verilerini Doldur (v1)", "🛠️ Program Manuel İnceleme"
         ])
         _render_program_fill_tab(tab_prog, settings)
         _render_program_manual_tab(tab_prog_manual)
 
+    elif work_mode == "⚡ Program Verilerini Doldurma (v2 — Dolu Excel Eksik Sütunlar)":
+        tab_v2, tab_prog_manual = st.tabs([
+            "⚡ v2 Eksik Sütun Doldur (Dolu Excel)", "🛠️ Program Manuel İnceleme"
+        ])
+        _render_program_fill_v2_tab(tab_v2, settings)
+        _render_program_manual_tab(tab_prog_manual)
+
     else:  # URL Bul + Program Doldur
-        tab_upload, tab_research, tab_prog, tab_manual = st.tabs([
-            "📂 Excel Yükle", "🔍 URL Araştırma", "📋 Program Doldur", "🛠️ Manuel Kontrol"
+        tab_upload, tab_research, tab_prog, tab_v2, tab_manual = st.tabs([
+            "📂 Excel Yükle", "🔍 URL Araştırma", "📋 Program Doldur (v1)", "⚡ Eksik Doldur (v2)", "🛠️ Manuel Kontrol"
         ])
         _render_upload_tab(tab_upload, settings)
         _render_research_tab(tab_research, settings)
         _render_program_fill_tab(tab_prog, settings)
+        _render_program_fill_v2_tab(tab_v2, settings)
         _render_manual_tab(tab_manual)
 
 
@@ -209,7 +249,7 @@ def _render_upload_tab(tab, settings):
                         "Eksik Alanlar": ", ".join(c.value for c in missing) if missing else "Yok",
                         "Durum": row.status or "Bekliyor",
                     })
-                st.dataframe(table_data, use_container_width=True)
+                _render_table(table_data)
 
             except Exception as e:
                 st.error(f"❌ Excel okuma hatası: {e}")
@@ -631,33 +671,13 @@ def _run_program_pipeline(settings, source_rows, template_info, matches, thresho
                     unsafe_allow_html=True,
                 )
 
-            # Doluluk Oranı Bar Chart
             if fill_rates:
                 st.markdown("#### 📊 Alan Bazlı Doluluk Oranları")
                 labels = list(fill_rates.keys())
-                values = [round(fill_rates[k] * 100, 1) for k in labels]
+                data = [{"Alan": k, "Doluluk (%)": round(fill_rates[k] * 100, 1)} for k in labels]
+                data.sort(key=lambda x: x["Doluluk (%)"])
 
-                import pandas as pd
-                df = pd.DataFrame({"Alan": labels, "Doluluk (%)": values})
-                df = df.sort_values("Doluluk (%)", ascending=True)
-
-                def _color_bar(val):
-                    if val < 30:
-                        return "background-color: #7a1a1a"
-                    elif val < 70:
-                        return "background-color: #7a6a00"
-                    return "background-color: #1a7a3a"
-
-                try:
-                    styled = df.style.map(_color_bar, subset=["Doluluk (%)"])
-                except AttributeError:
-                    styled = df.style.applymap(_color_bar, subset=["Doluluk (%)"])
-
-                st.dataframe(
-                    styled,
-                    use_container_width=True,
-                    height=min(600, len(labels) * 38 + 40),
-                )
+                _render_table(data, height=min(600, len(labels) * 38 + 40))
 
             # İstatistikler
             st.markdown("#### 📈 İstatistikler")
@@ -671,6 +691,212 @@ def _run_program_pipeline(settings, source_rows, template_info, matches, thresho
         st.caption(f"ℹ️ QA paneli yüklenirken hata: {_qa_err}")
 
 
+# ─────────────────── Sekme: v2 Program Verilerini Doldurma (Dolu Excel) ───────────────────
+
+
+def _render_program_fill_v2_tab(tab, settings):
+    with tab:
+        st.header("⚡ Program Verilerini Doldurma (v2 — Dolu Excel / Eksik Sütun Doldurucu)")
+        st.info(
+            "Bu mod, halihazırda dolu olan Excel dosyanızdaki "
+            "(`united_states_of_america_california_university_country_review_skill_kontrollu.xlsx` vb.) "
+            "**mevcut verilere kesinlikle dokunmadan**, yalnızca **boş/eksik kalan sütunları ve hücreleri** "
+            "referans biçiminde doldurur."
+        )
+
+        col_pop, col_src = st.columns(2)
+
+        with col_pop:
+            st.subheader("1️⃣ Dolu Program Excel'i (Zorunlu)")
+            populated_file = st.file_uploader(
+                "Zaten dolu olan ve eksik sütunları doldurulacak .xlsx dosyasını yükleyin",
+                type=["xlsx"],
+                key="v2_populated_excel_upload",
+                help="United States / California veya benzeri dolu program Excel dosyası",
+            )
+            if populated_file:
+                settings.ensure_directories()
+                pop_path = settings.data_input_dir / f"v2_populated_{populated_file.name}"
+                with open(pop_path, "wb") as f:
+                    f.write(populated_file.getbuffer())
+                st.session_state["v2_populated_excel_path"] = pop_path
+                st.success(f"✅ Dolu Excel yüklendi: {populated_file.name}")
+
+        with col_src:
+            st.subheader("2️⃣ URL Kaynak Excel'i (Opsiyonel — v1 gibi)")
+            v2_source_file = st.file_uploader(
+                "Üniversite URL'lerini içeren kaynak Excel dosyasını yükleyin (Opsiyonel)",
+                type=["xlsx"],
+                key="v2_source_excel_upload",
+                help="program_url, admission_url, language_url, tuition_url içeren dosya",
+            )
+            if v2_source_file:
+                settings.ensure_directories()
+                v2_src_path = settings.data_input_dir / f"v2_source_{v2_source_file.name}"
+                with open(v2_src_path, "wb") as f:
+                    f.write(v2_source_file.getbuffer())
+                st.session_state["v2_source_excel_path"] = v2_src_path
+                st.success(f"✅ URL Kaynak Excel yüklendi: {v2_source_file.name}")
+
+        pop_path = st.session_state.get("v2_populated_excel_path")
+        if pop_path:
+            _render_v2_analysis(pop_path, settings)
+
+
+def _render_v2_analysis(pop_path: Path, settings):
+    from src.program_pipeline.template_reader import read_template_excel
+    from src.program_pipeline.excel_writer_v2 import is_cell_empty
+    from openpyxl import load_workbook
+
+    st.divider()
+    st.subheader("🔍 Dolu Excel Analizi & Doluluk Oranları")
+
+    try:
+        tmpl_info = read_template_excel(pop_path)
+        wb = load_workbook(pop_path, data_only=True)
+        ws = wb[tmpl_info.sheet_name]
+        header_row = tmpl_info.header_row
+        col_map = tmpl_info.column_map
+
+        total_rows = max(0, (ws.max_row or header_row) - header_row)
+
+        fill_stats: dict[str, int] = {}
+        for h, c_idx in col_map.items():
+            filled_cnt = sum(
+                1 for r in range(header_row + 1, (ws.max_row or header_row) + 1)
+                if not is_cell_empty(ws.cell(row=r, column=c_idx).value)
+            )
+            fill_stats[h] = filled_cnt
+        wb.close()
+
+        total_cells = total_rows * len(col_map) if total_rows > 0 else 1
+        filled_cells_total = sum(fill_stats.values())
+        empty_cells_total = total_cells - filled_cells_total
+
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Toplam Program Satırı", total_rows)
+        c2.metric("Mevcut Dolu Hücre (Korunan)", filled_cells_total)
+        c3.metric("Boş Hücre (Hedeflenen)", empty_cells_total)
+        c4.metric("Genel Doluluk Oranı", f"%{(filled_cells_total / total_cells)*100:.1f}")
+
+        # Sütun Bazlı Doluluk Önizlemesi
+        with st.expander("📊 Sütun Bazlı Mevcut Doluluk Durumu"):
+            table_data = [
+                {
+                    "Sütun Adı": h,
+                    "Dolu Hücre": cnt,
+                    "Boş Hücre": total_rows - cnt,
+                    "Doluluk (%)": round((cnt / max(total_rows, 1)) * 100, 1),
+                }
+                for h, cnt in fill_stats.items()
+            ]
+            _render_table(table_data)
+
+        st.divider()
+        st.subheader("⚙️ v2 Pipeline Ayarları")
+        col_s1, col_s2 = st.columns(2)
+        with col_s1:
+            threshold = st.slider(
+                "Confidence Eşiği",
+                min_value=0.50, max_value=1.00, value=settings.program_auto_write_threshold,
+                step=0.05,
+                key="v2_threshold_slider",
+                help="Bu güven skorunun altındaki veriler boş bırakılır",
+            )
+        with col_s2:
+            clear_cache = st.checkbox(
+                "Cache'i Temizle",
+                value=False,
+                key="v2_clear_cache",
+                help="Önceki indirilen sayfalar yeniden çekilsin",
+            )
+
+        source_path = st.session_state.get("v2_source_excel_path")
+
+        if st.button("🚀 v2 Eksik Sütunları Doldurma İşlemini Başlat", type="primary", key="btn_run_v2"):
+            _run_v2_pipeline(
+                pop_path=pop_path,
+                source_path=source_path,
+                threshold=threshold,
+                clear_cache=clear_cache,
+                settings=settings,
+            )
+
+    except Exception as e:
+        st.error(f"❌ Excel analizi hatası: {e}")
+        logger.exception("v2 analiz hatası")
+
+
+def _run_v2_pipeline(pop_path: Path, source_path: Optional[Path], threshold: float, clear_cache: bool, settings):
+    from src.program_pipeline.pipeline_v2 import ProgramPipelineV2
+    from src.program_pipeline.checkpoint import CheckpointManager
+
+    if clear_cache:
+        import shutil
+        cache_dirs = ["html", "pdf", "playwright", "extracted"]
+        for d in cache_dirs:
+            p = settings.data_cache_dir / d
+            if p.exists():
+                shutil.rmtree(p)
+                p.mkdir(parents=True, exist_ok=True)
+        CheckpointManager(settings.checkpoint_dir).reset()
+        st.info("🗑️ Cache temizlendi.")
+
+    uni_progress = st.progress(0.0)
+    prog_progress = st.progress(0.0)
+    status_text = st.empty()
+    log_area = st.empty()
+    log_lines: list[str] = []
+
+    def on_progress(event: dict):
+        uni_done = event.get("uni_done", 0)
+        uni_total = event.get("uni_total", 1)
+        prog_done = event.get("prog_done", 0)
+        prog_total = event.get("prog_total", 1)
+        uni_progress.progress(uni_done / max(uni_total, 1))
+        prog_progress.progress(prog_done / max(prog_total, 1))
+        status_text.text(
+            f"⚡ v2 Dolduruluyor: {event.get('uni_name', '')} | "
+            f"Üniversite: {uni_done}/{uni_total}"
+        )
+        msg = event.get("log", "")
+        if msg:
+            log_lines.append(msg)
+            log_area.code("\n".join(log_lines[-30:]), language=None)
+
+    v2_pipeline = ProgramPipelineV2(
+        confidence_threshold=threshold,
+        progress_callback=on_progress,
+    )
+
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        result = loop.run_until_complete(
+            v2_pipeline.run(
+                populated_excel_path=pop_path,
+                output_dir=settings.data_output_dir,
+                source_excel_path=source_path,
+            )
+        )
+    finally:
+        loop.close()
+
+    st.session_state.program_results = result
+
+    st.success("🎉 v2 Eksik Sütun Doldurma Tamamlandı!")
+
+    if result.output_path and Path(result.output_path).exists():
+        st.session_state.program_output_path = result.output_path
+        st.success(f"💾 v2 Doldurulmuş Dosya Hazır: `{result.output_path}`")
+        with open(result.output_path, "rb") as f:
+            st.download_button(
+                "⬇️ v2 Doldurulmuş Excel'i İndir",
+                data=f,
+                file_name=Path(result.output_path).name,
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="download_v2_program_excel",
+            )
 
 
 # ─────────────────── Program Manuel İnceleme ───────────────────

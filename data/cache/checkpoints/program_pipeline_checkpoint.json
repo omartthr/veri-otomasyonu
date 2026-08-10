@@ -1,25 +1,9 @@
 {
   "schema_version": "program-quality-v3",
-  "completed_universities": [
-    "Bellevue University",
-    "Chadron State College",
-    "College of Saint Mary",
-    "Doane University",
-    "Nebraska Methodist College",
-    "Nebraska Methodist College of Nursing & Allied Health",
-    "Nebraska Wesleyan University"
-  ],
+  "completed_universities": [],
   "failed_universities": {},
-  "program_counts": {
-    "Bellevue University": 3,
-    "Chadron State College": 60,
-    "College of Saint Mary": 32,
-    "Doane University": 34,
-    "Nebraska Methodist College": 12,
-    "Nebraska Methodist College of Nursing & Allied Health": 12,
-    "Nebraska Wesleyan University": 17
-  },
-  "last_saved_output": "C:\\Users\\lenovo\\Downloads\\veri-otomasyonu\\veri-otomasyonu\\data\\output\\template_united_states_of_america_nebraska_university_country_review_programlar_doldurulmus.xlsx",
-  "started_at": "2026-08-02T23:19:02.230342",
-  "updated_at": "2026-08-02T23:37:04.595275"
+  "program_counts": {},
+  "last_saved_output": null,
+  "started_at": "2026-08-10T21:56:17.264232",
+  "updated_at": "2026-08-10T21:56:17.264232"
 }
