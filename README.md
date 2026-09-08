@@ -216,3 +216,69 @@ python -m pytest tests/ -v
 
 ---
 *Geliştirilmiş deterministik mimari ile her zaman en doğru, uydurmasız, esnek ve kanıtlı otomasyon!* 🚀🎓
+
+---
+
+## 🛠️ Kullanılan Teknolojiler ve Kütüphaneler (Bot Açıklaması)
+
+| Kategori | Kütüphane / Araç | Kullanım Amacı |
+| :--- | :--- | :--- |
+| **Arayüz (UI)** | `streamlit` | Web arayüzü, dosya yükleme ve onay paneli (`app.py`) |
+| **Excel Veri Yönetimi** | `openpyxl` | Hücre stilleri ve biçimlendirmeleri koruyarak Excel okuma/yazma |
+| **Veri Şablonları & Tip Güvenliği** | `pydantic`, `pydantic-settings` | Veri yapıları, doğrulama ve konfigürasyon yönetimi |
+| **Ağ ve HTTP İstemcisi** | `httpx` | Asenkron, hızlı web istekleri |
+| **Scraping & Tarayıcı Otomasyonu** | `playwright` | Bot korumalı veya JS yüklü siteleri açmak için headless tarayıcı |
+| **Metin & Doküman Analizi** | `beautifulsoup4`, `lxml`, `pypdf` | HTML ve PDF içeriklerinden temiz metin çıkarma |
+| **Hata & Retry Yönetimi** | `tenacity` | Başarısız isteklerde otomatik yeniden deneme mekanizması |
+
+---
+
+## 🔄 Sürüm Notları & Kalite Güncellemeleri (v3.2)
+
+Bu sürüm, iki Excel dosyasından `Programlar` sheetini dolduran akışın yüksek-hassasiyetli sürümüdür.
+
+**Düzeltilen Ana Problemler:**
+- HTML paragraf ve listelerinin çıkarım sırasında kaybolması giderildi.
+- Resmî domaindeki her sayfanın program sayılması engellendi.
+- `JSON-LD Structured Data`, program listeleri, blog, kayıt, başvuru ve genel politika sayfaları program satırı olarak reddediliyor.
+- Program adı; H1, sayfa başlığı, URL ve sayfa içeriği birlikte doğrulanarak seçiliyor.
+- Aynı programın yinelenen URL/başlık varyasyonları tekilleştiriliyor.
+- Resmî akademik katalog PDF'leri keşfediliyor; yalnızca tam program adının çevresindeki bölüm program-özel veri için kullanılıyor.
+- Genel kabul/dil/ücret bilgileri program-özel bilgilerle kanıt ve kapsam önceliğine göre birleştiriliyor.
+- Başvuru türü, belgeler, zorunlu maddeler, koşullu mülakat, İngilizce yeterlilik, standart test politikası, transkript şartı, akademik yıl ve kariyer çıktıları için deterministik çıkarıcılar eklendi.
+- Program kaynağı `Program Adı` hücresinin yorumuna yazılıyor; program URL'si artık yanlışlıkla `Kabul Verisi Kaynağı` sütununa konulmuyor.
+- Checkpoint yüzünden yeni çıktıda üniversitelerin kaybolması engellendi.
+- PDF ham içeriği korunuyor ve gerçekten PDF ayrıştırıcısına iletiliyor.
+- `PROXY_URL`, HTTP + curl + Playwright katmanlarının tümünde kullanılıyor.
+- Gemini/API anahtarı gereksinimi ve eski ayarları kaldırıldı.
+
+---
+
+## 🏙️ Şehir & Yaşam Rehberi Pipeline Kuralları
+
+Bu bölüm, **Şehir & Yaşam Rehberi (`city_livability_pipeline`)** otomasyon botunun uymak zorunda olduğu tüm veri toplama, doğrulama, kalite kapıları, matematiksel formüller ve Excel yazım kurallarını detaylandırmaktadır.
+
+### 1. Temel Felsefe ve Çalışma İlkeleri
+- **%100 Deterministik & Sıfır Uydurma:** Bot asla tahminî veya uydurma veri üretemez. Doğrulanabilir açık web kanıtı bulunamayan hücreler kesinlikle boş bırakılır.
+- **Kanıt ve Kaynak URL Zorunluluğu:** Fiyat, 1-5 skala puanı, boolean bayrak veya sayısal veriler için kaynak URL ve kanıt metni bulunması zorunludur.
+- **Format & Yorum Güvencesi:** Doldurulan her hücrenin Excel açıklamasına (Comment) Kaynak URL, Kanıt Alıntısı ve Doğrulama kuralı işlenir.
+- **Bağımlılık Zinciri:** Üniversiteler -> Şehirler -> İlçeler -> Kampüsler sırasıyla işlenir.
+
+### 2. 8 Katı Kalite Kapısı (Hard Quality Gates)
+1. **Domain Otoritesi:** `.gov.tr`, `tuik` (1.0), `.edu.tr` (0.95), genel web (0.50).
+2. **Aralık & Tip Güvenliği:** Mantıklı fiziksel/ekonomik sınırlarına tam uyum şarttır.
+3. **Kanıt Alıntısı (Quote Containment):** Çıkarılan değerin kaynak metin içinde birebir veya sayısal varyantlarıyla geçmesi zorunludur.
+4. **Güncellik & Para Birimi:** 2 yıldan eski verilerin güven puanı kırılır.
+5. **Coğrafi & İlişkisel Bütünlük:** Koordinatların Türkiye sınırlarında olması; sahte koordinatların elenmesi.
+6. **Uydurma Sıfır:** Boş/geçersiz veriler için hücre boş bırakılır.
+7. **3 Kademeli Güven Puanı:** Yüksek (>=0.85), Orta (0.60-0.84), Düşük (<0.60, Manuel inceleme).
+8. **Hücre Yorumu & Meta Veri:** Hücrelere zengin kanıt yorumu eklenir.
+
+### 3. Matematiksel & Türetilmiş Formül Kuralları
+- **Aylık Toplam (Yurtta):** KYK Yurt Ücreti + Aylık Yeme-İçme + Öğrenci Abonmanı + 2.500 TL (Kişisel Gider)
+- **Aylık Toplam (Ev Arkadaşlı):** Oda Başı Kira + ((Kış Faturası + Yaz Faturası)/2 + Aidat + İnternet)/2 + Yeme-İçme + Abonman + 2.500 TL
+- **Aylık Toplam (Tek Yaşam):** 1+1 Kira + ((Kış Faturası + Yaz Faturası)/2) + Aidat + İnternet + Yeme-İçme + Abonman + 2.500 TL
+- **Yıllık Toplam:** Aylık Toplam * 9
+- **TR Ortalamasına Göre Maliyet Endeksi:** (Şehir Ev Arkadaşlı Maliyeti / TR Medyan Maliyeti) * 100
+- **Öğrenci Yaşanabilirlik Skoru (0-100):** Maliyet (%35), Sosyal Hayat (%20), Güvenlik (%15), Ulaşım (%15), Staj (%15)
+- **Öğrenci / Nüfus Oranı (%):** (Yükseköğretim Öğrenci Sayısı / Nüfus) * 100

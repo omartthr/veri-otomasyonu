@@ -1,0 +1,1036 @@
+2_ÜNİVERSİTE_SKS GÖREVİ — ARAŞTIRMA VE VERİ DOLDURMA KURALLARI
+
+GÖREVİN AMACI
+--------------
+Excel dosyasındaki "2_Universite_SKS" sayfasında bulunan her üniversite için eksik bilgileri araştır, doğrula ve yalnızca resmi kaynaklardan elde edilen güvenilir verilerle doldur.
+
+Bu görevde 6 ana veri alanı araştırılacaktır:
+
+1. Yemekhane Öğün Ücreti
+2. Yurt Ücret Aralığı
+3. Toplam Yurt Kapasitesi
+4. Barınma Desteği Var Mı
+5. Öğrenciye Yemek Desteği Var Mı
+6. Ana Yerleşke Resmî Adı
+
+Ayrıca:
+7. Kaynak URL
+8. Not
+
+alanları uygun şekilde doldurulacaktır.
+
+
+============================================================
+1. TEMEL ARAŞTIRMA KURALLARI
+============================================================
+
+1. Her üniversite ayrı ayrı araştırılmalıdır.
+
+2. Öncelikli kaynak her zaman üniversitenin resmi internet sitesidir.
+
+3. Üniversitenin resmi internet sitesi için öncelikle:
+   - .edu.tr
+   - üniversitenin resmi alt alan adları
+   kullanılmalıdır.
+
+4. Üniversitenin resmi SKS (Sağlık Kültür ve Spor Daire Başkanlığı) sayfası özellikle yemek, yurt ve öğrenci destekleri için öncelikli kaynaktır.
+
+5. Üniversitenin resmi Strateji Geliştirme Daire Başkanlığı / İdare Faaliyet Raporu PDF'leri özellikle yurt kapasitesi araştırmasında kullanılmalıdır.
+
+6. Google araması yalnızca resmi kaynağı bulmak için kullanılabilir.
+
+7. Google sonuçlarında:
+   - haber siteleri
+   - bloglar
+   - Ekşi Sözlük
+   - forumlar
+   - öğrenci forumları
+   - sosyal medya
+   - Wikipedia
+   - özel bilgi siteleri
+   - emlak/yurt siteleri
+   - üçüncü taraf üniversite tanıtım siteleri
+
+   veri kaynağı olarak kullanılmamalıdır.
+
+8. Üçüncü taraf bir sitede bilgi bulunması, resmi kaynakta doğrulanmadığı sürece Excel'e yazılması için yeterli değildir.
+
+9. Resmi kaynak bulunamıyorsa veya veri doğrulanamıyorsa hücre BOŞ bırakılmalıdır.
+
+10. Kesinlikle:
+    - N/A
+    - Yok
+    - Bulunamadı
+    - Bilinmiyor
+    - 0
+    - Tahmini değer
+    - uydurma değer
+
+    yazılmamalıdır.
+
+11. Bir bilgi başka bir bilgiden mantıksal olarak çıkarılmamalıdır.
+
+Örneğin:
+"Üniversitenin yurdu var."
+bilgisinden:
+"Barınma desteği var."
+sonucu çıkarılamaz.
+
+Benzer şekilde:
+"Üniversitenin yemekhanesi ucuz."
+bilgisinden:
+"Yemek desteği var."
+sonucu çıkarılamaz.
+
+
+============================================================
+2. GOOGLE ARAMA STRATEJİSİ
+============================================================
+
+Her üniversite için araştırmaya aşağıdaki sırayla başlanmalıdır.
+
+[ÜNİVERSİTE ADI] yerine Excel'deki gerçek üniversite adı yazılacaktır.
+
+
+GENEL ARAMA:
+
+[ÜNİVERSİTE ADI] SKS
+
+[ÜNİVERSİTE ADI] Sağlık Kültür ve Spor Daire Başkanlığı
+
+[ÜNİVERSİTE ADI] öğrenci hizmetleri
+
+[ÜNİVERSİTE ADI] resmi site
+
+
+Arama sonuçlarında üniversitenin resmi alan adı tespit edilmelidir.
+
+Resmi alan adı tespit edildikten sonra mümkün olduğunca:
+
+site:RESMİ-DOMAIN "[ARAMA TERİMİ]"
+
+şeklinde arama yapılmalıdır.
+
+
+ÖRNEK:
+
+site:ankara.edu.tr "yemek ücretleri"
+
+site:ankara.edu.tr "yurt ücretleri"
+
+site:ankara.edu.tr "yurt kapasitesi"
+
+site:ankara.edu.tr "barınma desteği"
+
+site:ankara.edu.tr "yemek bursu"
+
+site:ankara.edu.tr "yerleşkeler"
+
+
+NOT:
+Üniversitenin gerçek domaini neyse aramada o kullanılmalıdır.
+Örnek olarak ankara.edu.tr sadece örnektir.
+
+
+============================================================
+3. YEMEKHANE ÖĞÜN ÜCRETİ
+============================================================
+
+AMAÇ:
+Üniversitede öğrencinin bir öğün yemek için ödediği güncel ücreti bul.
+
+ÖNCELİKLİ KAYNAK:
+Üniversitenin resmi SKS / Sağlık Kültür ve Spor Daire Başkanlığı sitesi.
+
+ARAMA SIRASI:
+
+1.
+[ÜNİVERSİTE ADI] öğrenci yemek ücreti 2026
+
+2.
+[ÜNİVERSİTE ADI] SKS yemek ücretleri 2026
+
+3.
+[ÜNİVERSİTE ADI] yemekhane ücretleri 2026
+
+4.
+[ÜNİVERSİTE ADI] öğrenci yemek fiyatı 2026
+
+5.
+site:RESMİ-DOMAIN "yemek ücretleri"
+
+6.
+site:RESMİ-DOMAIN "öğrenci yemek"
+
+7.
+site:RESMİ-DOMAIN "yemekhane" "TL"
+
+8.
+site:RESMİ-DOMAIN "yemek ücreti"
+
+
+GEREKİRSE:
+
+[ÜNİVERSİTE ADI] 2026 2027 yemek ücretleri
+
+[ÜNİVERSİTE ADI] 2026-2027 yemek tarifesi
+
+site:RESMİ-DOMAIN "2026" "yemek"
+
+site:RESMİ-DOMAIN "2026-2027" "yemek"
+
+
+ARANACAK İFADELER:
+
+- Öğrenci
+- Öğrenci yemek ücreti
+- Öğrenci öğün ücreti
+- Öğrenci yemek tarifesi
+- Öğrenci kahvaltı
+- Öğrenci öğle yemeği
+- Öğrenci akşam yemeği
+
+
+VERİ SEÇİM KURALI:
+
+Eğer resmi kaynakta:
+
+Öğrenci: 50 TL
+
+yazıyorsa Excel'e:
+
+50
+
+yaz.
+
+"TL" yazma.
+
+
+Eğer:
+
+Öğrenci yemek ücreti: 50 TL
+Personel yemek ücreti: 100 TL
+
+şeklinde iki farklı değer varsa yalnızca:
+
+50
+
+al.
+
+
+Eğer yemek fiyatı yalnızca personel için verilmişse öğrenci fiyatını personel fiyatından tahmin etme.
+
+
+GÜNCELLİK KURALI:
+
+Birden fazla resmi fiyat bulunursa en güncel geçerli tarife kullanılmalıdır.
+
+Örneğin:
+
+2024 → 30 TL
+2025 → 45 TL
+2026 → 70 TL
+
+ise:
+
+70
+
+kullan.
+
+
+Eski tarife geçerli görünmüyorsa kullanılmamalıdır.
+
+
+============================================================
+4. YURT ÜCRET ARALIĞI
+============================================================
+
+AMAÇ:
+Üniversitenin kendi öğrenci yurtlarının güncel aylık ücretlerinin minimum ve maksimum değerini belirlemek.
+
+ÖNCELİKLİ KAYNAK:
+Üniversitenin resmi SKS / yurt / öğrenci işleri sayfası.
+
+
+ARAMA SIRASI:
+
+1.
+[ÜNİVERSİTE ADI] yurt ücretleri 2026
+
+2.
+[ÜNİVERSİTE ADI] SKS yurt ücretleri 2026
+
+3.
+[ÜNİVERSİTE ADI] öğrenci yurdu ücretleri 2026
+
+4.
+[ÜNİVERSİTE ADI] üniversite yurdu aylık ücret 2026
+
+5.
+site:RESMİ-DOMAIN "yurt ücretleri"
+
+6.
+site:RESMİ-DOMAIN "yurt ücreti"
+
+7.
+site:RESMİ-DOMAIN "öğrenci yurdu" "TL"
+
+
+GEREKİRSE:
+
+[ÜNİVERSİTE ADI] 2026 2027 yurt fiyatları
+
+site:RESMİ-DOMAIN "2026-2027" "yurt"
+
+site:RESMİ-DOMAIN "2026" "yurt ücreti"
+
+
+VERİ SEÇİMİ:
+
+Resmi kaynakta farklı oda/yurt seçenekleri bulunuyorsa tüm ilgili AYLIK öğrenci yurdu fiyatlarını tespit et.
+
+Örneğin:
+
+Tek kişilik: 8.000 TL
+İki kişilik: 6.000 TL
+Üç kişilik: 5.000 TL
+Dört kişilik: 4.000 TL
+
+ise:
+
+Yurt Ücret Aralığı:
+
+4000-8000
+
+
+ÖNEMLİ:
+
+Ortalama hesaplama.
+
+En ucuz ve en pahalı uygun fiyatı kullan.
+
+
+AYLIK/YILLIK AYRIMI:
+
+Eğer kaynak yıllık fiyat veriyorsa ve resmi kaynak aylık karşılığını açıkça vermiyorsa kendi başına bölme.
+
+Örneğin:
+
+Yıllık ücret: 80.000 TL
+
+verilmişse otomatik olarak:
+
+6666.67 TL
+
+hesaplama.
+
+Aylık ücret açıkça verilmişse aylık değeri kullan.
+
+
+KYK KURALI:
+
+Bu alan üniversitenin kendi yurt ücretleri içindir.
+
+KYK yurt ücretlerini üniversitenin yurt ücreti olarak yazma.
+
+KYK bilgisi yalnızca üniversitenin kendi yurdundan ayrı olduğu açıkça anlaşılmalıdır.
+
+
+============================================================
+5. TOPLAM YURT KAPASİTESİ
+============================================================
+
+AMAÇ:
+Üniversitenin öğrenci yurtlarının toplam yatak/öğrenci kapasitesini bul.
+
+ÖNCELİKLİ KAYNAK:
+Üniversitenin resmi İdare Faaliyet Raporu / Faaliyet Raporu PDF'si.
+
+
+ARAMA SIRASI:
+
+1.
+[ÜNİVERSİTE ADI] 2025 faaliyet raporu pdf
+
+2.
+[ÜNİVERSİTE ADI] 2025 idare faaliyet raporu pdf
+
+3.
+[ÜNİVERSİTE ADI] 2026 faaliyet raporu pdf
+
+4.
+[ÜNİVERSİTE ADI] yurt kapasitesi
+
+5.
+site:RESMİ-DOMAIN "yurt kapasitesi"
+
+6.
+site:RESMİ-DOMAIN "yatak kapasitesi"
+
+7.
+site:RESMİ-DOMAIN "faaliyet raporu" "yurt"
+
+
+ÖNCELİK:
+2025 faaliyet raporu mevcutsa öncelikle onu kullan.
+
+Ancak daha yeni resmi rapor mevcutsa ve rapor güncel kapasiteyi veriyorsa daha yeni resmi kaynak tercih edilebilir.
+
+
+PDF İÇERİSİNDE ARANACAK KELİMELER:
+
+Ctrl + F:
+
+yurt kapasitesi
+
+yatak kapasitesi
+
+yurt
+
+öğrenci yurdu
+
+barınma
+
+kapasite
+
+yatak sayısı
+
+
+ÖRNEK:
+
+Yurt A: 500 yatak
+Yurt B: 300 yatak
+Yurt C: 200 yatak
+
+ise:
+
+Toplam Yurt Kapasitesi = 1000
+
+
+TOPLAMA KURALI:
+
+Aynı üniversitenin birden fazla öğrenci yurdu varsa öğrenci yurtlarının kapasitelerini topla.
+
+
+DAHİL ETME:
+
+- Konukevi
+- Misafirhane
+- Personel lojmanı
+- Akademik personel konutu
+- Öğretim elemanı konutu
+- Hastane misafirhanesi
+- Öğrenci olmayan konaklama birimleri
+
+
+ÇOK ÖNEMLİ:
+
+"Konukevi kapasitesi" öğrenci yurt kapasitesine dahil edilmemelidir.
+
+
+EĞER RAPORDA:
+
+"Yurtların toplam kapasitesi 1.250 kişi"
+
+yazıyorsa:
+
+1250
+
+yaz.
+
+
+EĞER SADECE:
+
+"Yurt binası bulunmaktadır."
+
+yazıyor ve kapasite belirtilmiyorsa:
+
+hücreyi BOŞ bırak.
+
+
+TAHMİN YAPMA.
+
+
+============================================================
+6. BARINMA DESTEĞİ VAR MI?
+============================================================
+
+AMAÇ:
+Üniversitenin öğrencilere doğrudan barınma/yurt desteği, yurt bursu veya barınma yardımı sağlayıp sağlamadığını tespit etmek.
+
+
+ARAMA SIRASI:
+
+1.
+[ÜNİVERSİTE ADI] barınma desteği
+
+2.
+[ÜNİVERSİTE ADI] öğrenci barınma desteği
+
+3.
+[ÜNİVERSİTE ADI] barınma bursu
+
+4.
+[ÜNİVERSİTE ADI] yurt bursu
+
+5.
+[ÜNİVERSİTE ADI] öğrenci yurt bursu
+
+6.
+[ÜNİVERSİTE ADI] konaklama desteği
+
+7.
+site:RESMİ-DOMAIN "barınma desteği"
+
+8.
+site:RESMİ-DOMAIN "barınma bursu"
+
+9.
+site:RESMİ-DOMAIN "yurt bursu"
+
+10.
+site:RESMİ-DOMAIN "konaklama desteği"
+
+
+EVET YAZILABİLECEK DURUMLAR:
+
+Resmi kaynakta açıkça:
+
+- Barınma desteği
+- Barınma bursu
+- Yurt bursu
+- Öğrencinin yurt ücretinin karşılanması
+- Öğrencilere konaklama desteği
+- İhtiyaç sahibi öğrencilere yurt desteği
+
+gibi bir destek belirtiliyorsa:
+
+Evet
+
+
+HAYIR/BOŞ KURALI:
+
+Sadece:
+
+"Üniversitemizin öğrenci yurdu bulunmaktadır."
+
+bilgisi barınma desteği anlamına gelmez.
+
+Sadece yurt bulunması durumunda:
+
+Barınma Desteği Var Mı = BOŞ
+
+Yaz.
+
+
+AYNI ŞEKİLDE:
+
+"Öğrenciler uygun ücretle yurtta kalabilir."
+
+ifadesi otomatik olarak barınma desteği değildir.
+
+
+SADECE AÇIK DESTEK VARSA "Evet" YAZ.
+
+
+============================================================
+7. ÖĞRENCİYE YEMEK DESTEĞİ VAR MI?
+============================================================
+
+AMAÇ:
+Üniversitenin öğrencilerine ücretsiz/indirimli yemek, yemek bursu veya doğrudan yemek desteği sağlayıp sağlamadığını tespit etmek.
+
+
+ARAMA SIRASI:
+
+1.
+[ÜNİVERSİTE ADI] öğrenci yemek desteği
+
+2.
+[ÜNİVERSİTE ADI] yemek bursu
+
+3.
+[ÜNİVERSİTE ADI] ücretsiz yemek
+
+4.
+[ÜNİVERSİTE ADI] öğrenci yemek bursu
+
+5.
+[ÜNİVERSİTE ADI] ücretsiz yemek bursu
+
+6.
+[ÜNİVERSİTE ADI] yemek yardımı
+
+7.
+site:RESMİ-DOMAIN "yemek bursu"
+
+8.
+site:RESMİ-DOMAIN "yemek desteği"
+
+9.
+site:RESMİ-DOMAIN "ücretsiz yemek"
+
+10.
+site:RESMİ-DOMAIN "öğrenci yemek"
+
+
+EVET:
+
+Resmi kaynakta:
+
+- Yemek bursu
+- Ücretsiz yemek desteği
+- İhtiyaç sahibi öğrencilere ücretsiz yemek
+- Öğrenci yemek desteği
+- Yemek yardımı
+
+gibi açık bir uygulama belirtiliyorsa:
+
+Evet
+
+
+ÖNEMLİ:
+
+Yemekhanenin öğrencilere düşük fiyatla yemek vermesi "yemek desteği" değildir.
+
+
+ÖRNEK:
+
+"Öğrenci yemeği 40 TL'dir."
+
+Bu:
+
+Yemek Ücreti = 40
+
+anlamına gelir.
+
+Ancak:
+
+"İhtiyaç sahibi öğrencilere ücretsiz yemek bursu verilmektedir."
+
+ifadesi:
+
+Öğrenciye Yemek Desteği Var Mı = Evet
+
+anlamına gelir.
+
+
+============================================================
+8. ANA YERLEŞKE RESMÎ ADI
+============================================================
+
+AMAÇ:
+Üniversitenin ana kampüsünün/yerleşkesinin üniversite tarafından kullanılan resmi adını bul.
+
+
+ÖNCELİKLİ KAYNAK:
+Üniversitenin resmi web sitesindeki:
+
+- Kampüsler
+- Yerleşkeler
+- Üniversitemiz
+- Hakkımızda
+- Kampüs Bilgileri
+
+sayfaları.
+
+
+ARAMA SIRASI:
+
+1.
+[ÜNİVERSİTE ADI] yerleşkelerimiz
+
+2.
+[ÜNİVERSİTE ADI] kampüslerimiz
+
+3.
+[ÜNİVERSİTE ADI] ana yerleşke
+
+4.
+[ÜNİVERSİTE ADI] ana kampüs
+
+5.
+site:RESMİ-DOMAIN "yerleşkeler"
+
+6.
+site:RESMİ-DOMAIN "kampüsler"
+
+7.
+site:RESMİ-DOMAIN "ana yerleşke"
+
+8.
+site:RESMİ-DOMAIN "ana kampüs"
+
+
+VERİ SEÇİMİ:
+
+Üniversitenin resmi sitesinde:
+
+"Merkez Yerleşkesi"
+
+"Beşevler 10. Yıl Yerleşkesi"
+
+"Merkez Kampüs"
+
+gibi resmi bir ad kullanılıyorsa o isim doğrudan alınmalıdır.
+
+
+KENDİN İSİM ÜRETME.
+
+Örneğin resmi kaynakta:
+
+"Merkez Yerleşke"
+
+yazmıyorsa sadece şehir merkezinde bulunduğu için:
+
+"Merkez Yerleşke"
+
+yazma.
+
+
+BİRDEN FAZLA KAMPÜS:
+
+Bir üniversitenin birden fazla kampüsü varsa "ana" olarak resmi kaynakta açıkça belirtilen kampüsü seç.
+
+
+Eğer üniversite resmi olarak ana kampüs belirtmiyorsa:
+
+Ana Yerleşke Resmî Adı = BOŞ
+
+
+============================================================
+9. KAYNAK URL KURALI
+============================================================
+
+Her doldurulan veri mümkün olduğunca doğrudan o bilgiyi içeren resmi sayfanın URL'si ile ilişkilendirilmelidir.
+
+
+ÖNCELİK:
+
+1. Verinin bulunduğu doğrudan resmi sayfa
+2. Resmi PDF
+3. Üniversitenin resmi ilgili birim sayfası
+
+
+ÖRNEK:
+
+Yemek ücreti SKS sayfasında bulunmuşsa:
+→ SKS yemek ücretleri sayfasının URL'si
+
+
+Yurt kapasitesi faaliyet raporunda bulunmuşsa:
+→ ilgili resmi faaliyet raporu PDF URL'si
+
+
+Burs bilgisi resmi burs sayfasında bulunmuşsa:
+→ resmi burs sayfasının URL'si
+
+
+GENEL ÜNİVERSİTE ANA SAYFASINI KAYNAK OLARAK KULLANMA.
+
+Eğer veri başka bir resmi alt sayfadaysa doğrudan o sayfayı kaynak göster.
+
+
+============================================================
+10. BİRDEN FAZLA KAYNAK KULLANILMASI
+============================================================
+
+Bir üniversite için farklı bilgiler farklı resmi sayfalardan bulunabilir.
+
+Örneğin:
+
+Yemek ücreti → SKS yemek sayfası
+
+Yurt ücreti → SKS yurt sayfası
+
+Yurt kapasitesi → faaliyet raporu PDF
+
+Barınma desteği → SKS burs/destek sayfası
+
+Yemek desteği → SKS burs/destek sayfası
+
+Ana yerleşke → Üniversitenin kampüs sayfası
+
+
+Bu durumda kaynak URL alanında birden fazla kaynak gerekiyorsa tüm ilgili resmi URL'ler korunmalıdır.
+
+
+============================================================
+11. NOT ALANI
+============================================================
+
+Not alanı yalnızca gerekli açıklamaları eklemek için kullanılmalıdır.
+
+Gereksiz uzun açıklama yazma.
+
+
+ÖRNEKLER:
+
+"Yurt kapasitesi 3 öğrenci yurdunun toplamıdır."
+
+"Faaliyet raporunda yalnızca yurtların toplam yatak kapasitesi verilmiştir."
+
+"Başarı bursu bulunmuş ancak barınma desteği belirtilmemiştir."
+
+"Yıllık ücret verilmiş, aylık ücret belirtilmediği için değer girilmedi."
+
+
+NOT:
+
+Bir bilgi bulunamadığında "bulunamadı" yazma.
+
+Hücreyi boş bırak.
+
+Not alanına yalnızca veri yorumunu açıklamak gerekiyorsa not ekle.
+
+
+============================================================
+12. GÜNCELLİK KONTROLÜ
+============================================================
+
+Ücret ve destek verilerinde özellikle 2026 / 2026-2027 bilgileri aranmalıdır.
+
+Arama sırasında:
+
+2026
+
+2026-2027
+
+2025-2026
+
+anahtar kelimeleri kullanılabilir.
+
+
+Öncelik:
+
+2026-2027
+↓
+2026
+↓
+2025-2026
+↓
+daha eski resmi veri
+
+
+Daha eski veri ile daha yeni resmi veri çelişiyorsa daha yeni ve geçerli resmi veri kullanılmalıdır.
+
+
+============================================================
+13. ÇELİŞKİLİ VERİLER
+============================================================
+
+Aynı veri için iki farklı resmi kaynak bulunursa hemen birini seçme.
+
+Önce:
+
+1. Yayın tarihini kontrol et.
+2. Verinin geçerlilik tarihini kontrol et.
+3. Güncel tarife olup olmadığını kontrol et.
+4. Üniversitenin ilgili biriminin kaynağını tercih et.
+5. Gerekirse resmi duyuru ile resmi tarife sayfasını karşılaştır.
+
+En güncel ve açık şekilde geçerli olan veri kullanılmalıdır.
+
+
+============================================================
+14. VERİ DOĞRULAMA
+============================================================
+
+Bir değer Excel'e yazılmadan önce şu kontrol yapılmalıdır:
+
+[ ] Kaynak resmi mi?
+[ ] Üniversite ile gerçekten ilgili mi?
+[ ] Veri doğru alanı mı ifade ediyor?
+[ ] Güncel mi?
+[ ] Başka bir veri ile karıştırılmadı mı?
+[ ] Değer tahmin edilmedi mi?
+[ ] Kaynak URL doğru mu?
+
+
+Özellikle:
+
+Yurt ≠ Barınma desteği
+
+Ucuz yemek ≠ Yemek desteği
+
+KYK ≠ Üniversite yurdu
+
+Konukevi ≠ Öğrenci yurdu
+
+Kampüs adı ≠ Şehir adı
+
+
+============================================================
+15. VERİ BULUNAMADIĞINDA
+============================================================
+
+Bir veri resmi kaynaklarda yapılan makul aramalara rağmen bulunamıyorsa:
+
+HÜCREYİ BOŞ BIRAK.
+
+
+Kesinlikle:
+
+N/A
+Yok
+Bulunamadı
+Bilinmiyor
+-
+0
+
+girme.
+
+
+============================================================
+16. HER ÜNİVERSİTE İÇİN UYGULANACAK TAM İŞ AKIŞI
+============================================================
+
+Her üniversite için aşağıdaki sırayı uygula:
+
+ADIM 1:
+Üniversitenin resmi domainini tespit et.
+
+ADIM 2:
+Üniversitenin SKS sayfasını tespit et.
+
+ADIM 3:
+"Yemek ücretleri" araştır.
+
+ADIM 4:
+"Yurt ücretleri" araştır.
+
+ADIM 5:
+"Yurt kapasitesi" araştır.
+
+ADIM 6:
+"Barınma desteği / yurt bursu" araştır.
+
+ADIM 7:
+"Yemek desteği / yemek bursu" araştır.
+
+ADIM 8:
+"Yerleşkeler / kampüsler" araştır.
+
+ADIM 9:
+Bulunan her verinin resmi kaynak URL'sini kaydet.
+
+ADIM 10:
+Her verinin doğru üniversiteye ait olduğunu kontrol et.
+
+ADIM 11:
+Güncellik kontrolü yap.
+
+ADIM 12:
+Tahmini veya doğrulanamayan verileri çıkar.
+
+ADIM 13:
+Yalnızca doğrulanmış verileri Excel'e yaz.
+
+ADIM 14:
+Boş kalan alanları boş bırak.
+
+ADIM 15:
+Son kontrolde tüm doldurulan hücreleri kaynaklarıyla karşılaştır.
+
+
+============================================================
+17. ARAMA MOTORU İÇİN HAZIR ŞABLON
+============================================================
+
+Her üniversite için aşağıdaki aramaları sırayla çalıştır:
+
+[ÜNİVERSİTE ADI] SKS
+
+[ÜNİVERSİTE ADI] öğrenci yemek ücreti 2026
+
+[ÜNİVERSİTE ADI] SKS yemek ücretleri 2026
+
+[ÜNİVERSİTE ADI] yurt ücretleri 2026
+
+[ÜNİVERSİTE ADI] SKS yurt ücretleri 2026
+
+[ÜNİVERSİTE ADI] 2025 faaliyet raporu pdf
+
+[ÜNİVERSİTE ADI] 2025 idare faaliyet raporu pdf
+
+[ÜNİVERSİTE ADI] yurt kapasitesi
+
+[ÜNİVERSİTE ADI] barınma desteği
+
+[ÜNİVERSİTE ADI] barınma bursu
+
+[ÜNİVERSİTE ADI] yurt bursu
+
+[ÜNİVERSİTE ADI] öğrenci yemek desteği
+
+[ÜNİVERSİTE ADI] yemek bursu
+
+[ÜNİVERSİTE ADI] ücretsiz yemek
+
+[ÜNİVERSİTE ADI] yerleşkelerimiz
+
+[ÜNİVERSİTE ADI] kampüslerimiz
+
+[ÜNİVERSİTE ADI] ana yerleşke
+
+
+Ardından resmi domain tespit edildikten sonra:
+
+site:RESMİ-DOMAIN "yemek"
+
+site:RESMİ-DOMAIN "yurt"
+
+site:RESMİ-DOMAIN "yurt kapasitesi"
+
+site:RESMİ-DOMAIN "barınma"
+
+site:RESMİ-DOMAIN "yemek bursu"
+
+site:RESMİ-DOMAIN "yemek desteği"
+
+site:RESMİ-DOMAIN "yerleşke"
+
+site:RESMİ-DOMAIN "kampüs"
+
+
+============================================================
+18. SON KALİTE KONTROLÜ
+============================================================
+
+Excel'e veri yazmadan önce her üniversite için şu kontrolü yap:
+
+1. Üniversitenin adı doğru mu?
+2. Resmi kaynak gerçekten bu üniversiteye mi ait?
+3. Kaynak güncel mi?
+4. Yemek ücreti öğrenci fiyatı mı?
+5. Yurt ücreti üniversitenin kendi yurdu mu?
+6. Yurt kapasitesi sadece öğrenci yurtlarını mı içeriyor?
+7. Konukevi kapasitesi yanlışlıkla eklenmiş mi?
+8. Barınma desteği gerçekten bir destek/burs mu?
+9. Yemek desteği gerçekten bir destek/burs mu?
+10. Ana yerleşke adı üniversitenin resmi kullandığı ad mı?
+11. Kaynak URL doğrudan doğru bilgiye götürüyor mu?
+12. Tahmin edilen herhangi bir veri var mı?
+
+Herhangi bir şüpheli veri varsa veri girme; hücreyi boş bırak.
+
+
+============================================================
+TEMEL PRENSİP
+============================================================
+
+AMAÇ, EXCEL'İ DOLDURMAK DEĞİL;
+DOĞRULANABİLİR VE RESMİ KAYNAKLI VERİYLE DOLDURMAKTIR.
+
+Bir hücrenin boş kalması,
+yanlış veya tahmini bir bilgiyle doldurulmasından DAHA DOĞRUDUR.
+
+ASLA VERİ UYDURMA.
+ASLA KAYNAK UYDURMA.
+ASLA URL UYDURMA.
+ASLA TAHMİN YAPMA.
+ASLA ÜÇÜNCÜ TARAF KAYNAĞI RESMİ KAYNAK GİBİ KULLANMA.
+
+Her veri:
+RESMİ KAYNAK → DOĞRULAMA → GÜNCELLİK KONTROLÜ → EXCEL'E YAZMA
+sırasıyla işlenmelidir.
