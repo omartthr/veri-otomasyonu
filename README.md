@@ -87,11 +87,16 @@ flowchart TD
 veri-otomasyonu/
 ├── app.py                      # Streamlit Ana Web Uygulaması (4 Çalışma Modu & Saf HTML Tablo Panel)
 ├── requirements.txt            # Python kütüphane bağımlılık listesi
-├── run_dc_e2e_test.py          # Uçtan uca (E2E) saha doğrulama betiği
-├── QUALITY_UPGRADE.md          # Kalite iyileştirme dokümanı
-├── BOT_ACIKLAMA.md             # Bot çalışma felsefesi detayları
 ├── .env.example                # Ortam yapılandırmaları ve proxy konfigürasyon şablonu
 ├── .gitignore                  # Git dışlama kuralları (venv, cache, data IO klasörleri)
+│
+├── prompts/                    # Araştırma politikaları ve alan kuralları
+│   ├── research_policy.txt     # Resmî kaynak, kapsam ve kanıt kullanım politikası
+│   └── 2_universite_sks_kurallari.txt # Üniversite SKS araştırma kuralları
+│
+├── scripts/                    # Gerçek saha testi ve grafik dışa aktarma araçları
+│   ├── run_real_mode_benchmark.py # Dört çalışma modu için gerçek saha benchmark'ı
+│   └── export_test_graphs_png.py  # Test grafiklerini PNG olarak dışa aktarır
 │
 ├── src/                        # 🧠 Sistem Çekirdeği ve Modüler Mimarisi
 │   ├── config.py               # Pydantic tabanlı dinamik konfigürasyon yönetimi
@@ -127,6 +132,7 @@ veri-otomasyonu/
 │   ├── program_pipeline/       # 🚀 48 Sütunlu Şablon ve v1/v2 Akış Motoru
 │   │   ├── pipeline.py         # v1 Paralel ve checkpoint güvenceli tam akış denetleyicisi
 │   │   ├── pipeline_v2.py      # v2 Eksik sütun doldurma ve hedefli URL keşif denetleyicisi
+│   │   ├── excel_writer.py     # v1 program kayıtlarını şablona yazan çıktı motoru
 │   │   ├── excel_writer_v2.py  # v2 Sıfır üzerine yazma garantili ve referans biçimli Excel yazıcısı
 │   │   ├── program_discovery.py# Sitemap ve sayfa başlıklarından gerçek program tespiti
 │   │   ├── targeted_search.py  # Eksik alanlar için resmî domain içi ikincil arama motoru
@@ -136,23 +142,43 @@ veri-otomasyonu/
 │   │   ├── qa_exporter.py      # Görsel QA Raporu üreticisi ve sert baraj kesicisi
 │   │   ├── evidence_validator.py # Kanıt (quote) cümle doğrulayıcı ve kontrolcüsü
 │   │   ├── field_merger.py     # Lisans/Y.Lisans politikaları & program verilerini birleştirici
+│   │   ├── general_policy_extractor.py # Üniversite geneli kabul politikalarını çıkarır
 │   │   ├── checkpoint.py       # Yarım kalan akışları kesinti noktasından başlatan motor
+│   │   ├── confidence.py       # Yazma, manuel kontrol ve boş bırakma güven kararları
+│   │   ├── content_sections.py # HTML/PDF içeriğini kanıtlanabilir bölümlere ayırır
+│   │   ├── policy_scope.py     # Program ve üniversite politikası kapsam uyumunu denetler
+│   │   ├── taxonomy.py         # Sayfaları program, katalog ve gürültü türlerine ayırır
+│   │   ├── tuition_matcher.py  # Ücret değerlerini dönem ve birim bilgisiyle eşleştirir
+│   │   ├── university_matcher.py # Kaynak ve şablon üniversitelerini güvenli eşleştirir
 │   │   ├── normalizer.py       # Çift kaydı kıran akıllı anahtar (space/punctuation insensitive)
 │   │   ├── source_excel_reader.py # Esnek "Gerekli Değil" URL sıçramalarını yakalayan okuyucu
 │   │   └── template_reader.py  # Şablon ve Dolu Excel tablosu mimari ayrıştırıcı
 │   │
-│   └── search/                 # 🔎 Arama ve Keşif Aracı Modülleri
-│       ├── site_discovery.py   # Resmî kök site & sitemap içi navigasyonel gezgin
-│       ├── web_searcher.py     # DuckDuckGo, Bing, Google paralel arama motoru takviyeleri
-│       └── query_builder.py    # Akıllı, hedefi tam vuran sorgu kalıpları üreteci
+│   ├── search/                 # 🔎 Arama ve Keşif Aracı Modülleri
+│   │   ├── site_discovery.py   # Resmî kök site & sitemap içi navigasyonel gezgin
+│   │   ├── source_searcher.py  # Kategori bazlı aday kaynak orkestrasyonu
+│   │   ├── web_searcher.py     # DuckDuckGo, Bing, Google paralel arama motoru takviyeleri
+│   │   └── query_builder.py    # Akıllı, hedefi tam vuran sorgu kalıpları üreteci
+│   │
+│   └── validation/             # ✅ Kural, kanıt ve güven puanı doğrulama katmanı
+│       ├── evidence_checker.py # Alıntıların indirilen kaynakta bulunduğunu doğrular
+│       ├── rule_based_validator.py # Anahtarsız deterministik aday doğrulayıcı
+│       ├── rule_validator.py   # Kategori ve kurum kurallarını uygular
+│       └── scoring.py          # Aday URL güven puanı hesaplayıcısı
 │
-├── tests/                      # 🧪 220+ Kapsamlı Otomatik Test ve v2 Birim Doğrulamaları
+├── tests/                      # 🧪 206 başarılı otomatik test ve canlı entegrasyon kontrolleri
 │   ├── test_pipeline_v2.py     # v2 Pipeline, sıfır ezme ve biçim doğrulama testleri
+│   ├── test_program_quality_v3.py # Sert program kalite kuralları regresyon testleri
+│   ├── test_integration_phoenix.py # Canlı HTTP saha doğrulama testleri
 │   └── ...
+├── test-results/               # 📊 Gerçek mod benchmark çıktıları ve grafik raporları
+│   └── real-benchmark/         # JSON sonuçlar, QA raporları, Excel ve görseller
+│
 └── data/                       # 💾 Lokal Dosya ve Önbellek Veritabanı
-    ├── input/                  # Girdi Kaynak, Şablon ve Dolu Excel dosyaları
-    ├── output/                 # 48 Sütunlu çıktı tabloları ve QA logları
-    └── cache/                  # Web indirme önbelleği ve tarayıcı ön kütükleri
+    ├── input/                  # Girdi kaynak, şablon ve dolu Excel dosyaları
+    ├── output/                 # 48 sütunlu çıktı tabloları ve QA raporları
+    ├── audit/                  # Alan bazlı kanıt geçmişi ve manuel kontrol kuyruğu
+    └── cache/                  # HTML, PDF, Playwright ve checkpoint önbelleği
 ```
 
 ---

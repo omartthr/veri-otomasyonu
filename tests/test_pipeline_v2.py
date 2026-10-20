@@ -129,3 +129,65 @@ def test_write_missing_fields_to_populated_excel_preserves_existing_data():
         assert out_ws.cell(row=2, column=7).value == "7.0"
 
         out_wb.close()
+
+
+def test_subject_only_name_matches_one_unique_degree_row(tmp_path):
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "Programlar"
+    headers = ["Üniversite Adı", "Program Adı", "Minimum GPA"]
+    sheet.append(headers)
+    sheet.append(["Test University", "Bachelor of Arts in Criminal Justice", ""])
+    input_path = tmp_path / "input.xlsx"
+    output_path = tmp_path / "output.xlsx"
+    workbook.save(input_path)
+    workbook.close()
+
+    record = ProgramRecord(
+        university_name="Test University",
+        program_name=ExtractedField(value="Criminal Justice", confidence=0.99),
+        fields={"Minimum GPA": ExtractedField(value=3.0, confidence=0.95)},
+    )
+    stats = write_missing_fields_to_populated_excel(
+        input_path,
+        output_path,
+        [record],
+        {header: index + 1 for index, header in enumerate(headers)},
+    )
+
+    assert stats["empty_cells_filled"] == 1
+    output = load_workbook(output_path, data_only=True)
+    assert output["Programlar"].cell(2, 3).value == "3"
+    output.close()
+
+
+def test_ambiguous_single_word_subject_is_not_matched(tmp_path):
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "Programlar"
+    headers = ["Üniversite Adı", "Program Adı", "Minimum GPA"]
+    sheet.append(headers)
+    sheet.append(["Test University", "Bachelor of Arts in Christian Education", ""])
+    sheet.append(["Test University", "Associate of Arts in Christian Education", ""])
+    input_path = tmp_path / "input.xlsx"
+    output_path = tmp_path / "output.xlsx"
+    workbook.save(input_path)
+    workbook.close()
+
+    record = ProgramRecord(
+        university_name="Test University",
+        program_name=ExtractedField(value="Education", confidence=0.99),
+        fields={"Minimum GPA": ExtractedField(value=3.0, confidence=0.95)},
+    )
+    stats = write_missing_fields_to_populated_excel(
+        input_path,
+        output_path,
+        [record],
+        {header: index + 1 for index, header in enumerate(headers)},
+    )
+
+    assert stats["empty_cells_filled"] == 0
+    output = load_workbook(output_path, data_only=True)
+    assert output["Programlar"].cell(2, 3).value is None
+    assert output["Programlar"].cell(3, 3).value is None
+    output.close()

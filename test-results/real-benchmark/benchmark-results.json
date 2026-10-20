@@ -1,0 +1,123 @@
+{
+  "sample_strategy": "one real university per mode",
+  "modes": {
+    "url_discovery": {
+      "duration_seconds": 202.79,
+      "university": "Southeastern Baptist College",
+      "requested": 4,
+      "accepted": 4,
+      "completion_rate": 1.0,
+      "status": "Tamamlandı",
+      "results": {
+        "program": {
+          "url": "https://southeasternbaptist.edu/wp-content/uploads/2026/07/ACADEMIC-CATALOG-2026-2027.docx-2.pdf",
+          "decision": "accepted",
+          "score": 90
+        },
+        "admission": {
+          "url": "https://southeasternbaptist.edu/wp-content/uploads/2026/07/ACADEMIC-CATALOG-2026-2027.docx-2.pdf",
+          "decision": "accepted",
+          "score": 90
+        },
+        "language": {
+          "url": "https://southeasternbaptist.edu/wp-content/uploads/2026/07/ACADEMIC-CATALOG-2026-2027.docx-2.pdf",
+          "decision": "accepted",
+          "score": 90
+        },
+        "tuition": {
+          "url": "https://southeasternbaptist.edu/wp-content/uploads/2026/07/ACADEMIC-CATALOG-2026-2027.docx-2.pdf",
+          "decision": "accepted",
+          "score": 90
+        }
+      },
+      "notes": []
+    },
+    "program_v1": {
+      "duration_seconds": 131.57,
+      "university": "Southeastern Baptist College",
+      "programs": 0,
+      "cells_written": 0,
+      "cells_empty": 0,
+      "completion_rate": 0.0,
+      "needs_review": 0,
+      "errors": [],
+      "output_path": null,
+      "qa": {
+        "total_universities": 1,
+        "programs_per_university": {},
+        "rejected_candidates_count": 4,
+        "rejection_reasons": {
+          "doğrulanmış program adı yok": 2,
+          "taksonomi reddi (CATALOG)": 1,
+          "taksonomi reddi (PROGRAM_LIST)": 1
+        },
+        "duplicate_count": 0,
+        "junk_program_names_count": 0,
+        "official_program_source_ratio": 0.0,
+        "name_and_url_only_count": 0,
+        "duration_fill_rate": 0.0,
+        "tuition_fill_rate": 0.0,
+        "admission_fill_rate": 0.0,
+        "language_fill_rate": 0.0,
+        "historical_source_count": 0,
+        "fake_derived_count": 0,
+        "fill_rates_by_field": {
+          "Eğitim Süresi": 0.0,
+          "Yıllık Ücret": 0.0,
+          "Minimum GPA": 0.0,
+          "Minimum IELTS": 0.0,
+          "Minimum TOEFL": 0.0,
+          "Essay Gerekli Mi": 0.0,
+          "Mülakat Gerekli Mi": 0.0,
+          "Kabul Verisi Kaynağı": 0.0,
+          "Başvuru Belgeleri": 0.0,
+          "Zorunlu Başvuru Maddeleri": 0.0,
+          "Başvuru Dönemi": 0.0,
+          "Son Başvuru Metni": 0.0,
+          "İngilizce Yeterlilik Gerekli Mi": 0.0,
+          "Standart Test Politikası": 0.0,
+          "Transkript/GED Gereksinimi": 0.0,
+          "Fakülte": 0.0,
+          "Eğitim Dili": 0.0
+        },
+        "empty_source_url_count": 0,
+        "passed_qa": false,
+        "failure_reasons": [
+          "[Kural 3] Resmî kaynağı doğrulanmamış satır var (oran: 0.00)"
+        ],
+        "warning_reasons": [
+          "[Kural 1] Düşük doluluk oranı: Eğitim Süresi doluluk: %0; Minimum GPA doluluk: %0"
+        ]
+      }
+    },
+    "program_v2": {
+      "duration_seconds": 25.23,
+      "university": "Arkansas Baptist College",
+      "programs": 5,
+      "cells_written": 6,
+      "cells_empty": 48,
+      "completion_rate": 0.1111,
+      "workbook_fill_before": {
+        "cells": 672,
+        "filled": 294,
+        "rate": 0.4375
+      },
+      "workbook_fill_after": {
+        "cells": 672,
+        "filled": 300,
+        "rate": 0.4464
+      },
+      "existing_cells_preserved": true,
+      "errors": [],
+      "output_path": "C:\\Users\\lenovo\\OneDrive\\Desktop\\veri-otomasyonu\\veri-otomasyonu\\test-results\\real-benchmark\\v2\\v2_doldurulmus_v2-single-university-input.xlsx"
+    },
+    "combined": {
+      "university": "Southeastern Baptist College",
+      "duration_seconds": 334.36,
+      "stages_completed": 4,
+      "stages_total": 5,
+      "completion_rate": 0.8,
+      "note": "URL discovery followed by the same v1 automation run."
+    }
+  }
+}

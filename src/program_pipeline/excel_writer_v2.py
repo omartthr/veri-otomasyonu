@@ -30,6 +30,12 @@ from src.program_pipeline.program_quality import normalize_program_key
 
 logger = logging.getLogger(__name__)
 
+_DEGREE_NAME_TOKENS = {
+    "associate", "arts", "bachelor", "business", "certificate", "degree",
+    "doctor", "doctoral", "graduate", "master", "program", "science",
+    "of", "in", "and", "the",
+}
+
 # Boş hücre olarak değerlendirilecek değerler
 _EMPTY_SENTINELS = {None, "", "null", "none", "n/a", "na", "—", "-", "[boş]", "[bos]"}
 
@@ -40,6 +46,65 @@ def is_cell_empty(value: Any) -> bool:
         return True
     val_str = str(value).strip().lower()
     return val_str in _EMPTY_SENTINELS
+
+
+def _program_subject_tokens(name: str) -> set[str]:
+    return {
+        token for token in normalize_program_key(name).split()
+        if len(token) >= 3 and token not in _DEGREE_NAME_TOKENS
+    }
+
+
+def _build_safe_record_matches(
+    worksheet: Worksheet,
+    header_row: int,
+    university_column: int,
+    program_column: int,
+    records: list[ProgramRecord],
+) -> dict[int, ProgramRecord]:
+    """Tam ad veya benzersiz, en az iki kelimeli konu eşleşmesi kur."""
+    rows: list[tuple[int, str, str, set[str]]] = []
+    for row_index in range(header_row + 1, (worksheet.max_row or header_row) + 1):
+        university = worksheet.cell(row_index, university_column).value
+        program = worksheet.cell(row_index, program_column).value
+        if university and program:
+            name = str(program).strip()
+            rows.append((
+                row_index,
+                str(university).strip().casefold(),
+                normalize_program_key(name),
+                _program_subject_tokens(name),
+            ))
+
+    matches: dict[int, ProgramRecord] = {}
+    used_records: set[int] = set()
+    for record_index, record in enumerate(records):
+        if not record.university_name or not record.program_name.value:
+            continue
+        university = record.university_name.strip().casefold()
+        normalized = normalize_program_key(str(record.program_name.value))
+        exact_rows = [row for row in rows if row[1] == university and row[2] == normalized]
+        if len(exact_rows) == 1:
+            matches[exact_rows[0][0]] = record
+            used_records.add(record_index)
+
+    for record_index, record in enumerate(records):
+        if record_index in used_records or not record.university_name or not record.program_name.value:
+            continue
+        university = record.university_name.strip().casefold()
+        subject_tokens = _program_subject_tokens(str(record.program_name.value))
+        if len(subject_tokens) < 2:
+            continue
+        candidate_rows = [
+            row for row in rows
+            if row[0] not in matches
+            and row[1] == university
+            and subject_tokens.issubset(row[3])
+        ]
+        if len(candidate_rows) == 1:
+            matches[candidate_rows[0][0]] = record
+
+    return matches
 
 
 def format_field_value_v2(field_name: str, field: ExtractedField) -> Optional[Any]:
@@ -154,18 +219,11 @@ def write_missing_fields_to_populated_excel(
 
         ws: Worksheet = wb[sheet_name]
 
-        # Üniversite + Program adından ProgramRecord'a hızlı erişim haritası
-        record_map: dict[tuple[str, str], ProgramRecord] = {}
-        for rec in program_records:
-            if rec.university_name and rec.program_name and rec.program_name.value:
-                key = (
-                    rec.university_name.strip().casefold(),
-                    normalize_program_key(str(rec.program_name.value)),
-                )
-                record_map[key] = rec
-
         uni_col = column_map.get("Üniversite Adı") or column_map.get("University Name") or 2
         prog_col = column_map.get("Program Adı") or column_map.get("Program Name") or 3
+        row_record_map = _build_safe_record_matches(
+            ws, header_row, uni_col, prog_col, program_records
+        )
 
         max_row = ws.max_row or header_row
 
@@ -177,11 +235,7 @@ def write_missing_fields_to_populated_excel(
                 continue
 
             stats["total_rows"] += 1
-            uni_name = str(uni_val).strip()
-            prog_name = str(prog_val).strip()
-
-            key = (uni_name.casefold(), normalize_program_key(prog_name))
-            record = record_map.get(key)
+            record = row_record_map.get(row_idx)
 
             # Eşleşen program verisi yoksa satırdaki boş hücreler kalır
             if not record:

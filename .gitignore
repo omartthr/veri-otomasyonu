@@ -22,6 +22,13 @@ ENV/
 data/input/*.xlsx
 data/output/*.xlsx
 data/cache/*.json
+data/cache/html/
+data/cache/pdf/
+test-results/**/v1/
+test-results/**/v2/
+test-results/**/*-input.xlsx
+test-results/**/*-source.xlsx
+test-results/**/*.html
 
 # OS
 .DS_Store
