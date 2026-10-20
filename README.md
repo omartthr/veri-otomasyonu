@@ -4,7 +4,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit UI](https://img.shields.io/badge/streamlit-1.32%2B-FF4B4B.svg)](https://streamlit.io)
-[![Test Suite](https://img.shields.io/badge/tests-220%2B%20passed-brightgreen.svg)](https://docs.pytest.org)
+[![Test Suite](https://img.shields.io/badge/tests-206%20passed-brightgreen.svg)](https://docs.pytest.org)
 [![Operation Mode](https://img.shields.io/badge/engine-100%25%20Deterministic%20%7C%20No--LLM%20Hallucinations-8A2BE2.svg)](#)
 
 ---
@@ -173,6 +173,11 @@ veri-otomasyonu/
 │   └── ...
 ├── test-results/               # 📊 Gerçek mod benchmark çıktıları ve grafik raporları
 │   └── real-benchmark/         # JSON sonuçlar, QA raporları, Excel ve görseller
+│       └── png/                # README ve raporlarda kullanılan PNG grafikler
+│           ├── 01-test-ozeti.png
+│           ├── 02-mod-kararlari.png
+│           ├── 03-manuel-kontrol.png
+│           └── 04-doluluk-artisi.png
 │
 └── data/                       # 💾 Lokal Dosya ve Önbellek Veritabanı
     ├── input/                  # Girdi kaynak, şablon ve dolu Excel dosyaları
@@ -211,11 +216,31 @@ playwright install chromium
 
 ## 🧪 Test Paketi ve Saha Doğrulama
 
-Kod üzerinde değişiklik yaptığınızda mimarinin bütünselliğinden emin olmak için depoda var olan **220'den fazla pytest entegre birim test serisini** saniyeler içinde çalıştırabilirsiniz:
+Kod üzerinde değişiklik yaptığınızda mimarinin bütünselliğinden emin olmak için depodaki test paketini çalıştırabilirsiniz. Son doğrulamada **206 test başarılı**, **3 canlı entegrasyon testi atlandı**:
 
 ```powershell
 python -m pytest tests/ -v
 ```
+
+### Gerçek Saha Testi Grafikleri
+
+Gerçek saha koşusu; URL bulma, program v1, program v2, birleşik akış, manuel kontrol ve katı doğrulama kuralları korunarak sağlanan doluluk artışını birlikte ölçer.
+
+#### Test Özeti
+
+![Otomasyon test özeti](test-results/real-benchmark/png/01-test-ozeti.png)
+
+#### Mod Bazında Kabul, Manuel Kontrol ve Red Kararları
+
+![Mod bazında test kararları](test-results/real-benchmark/png/02-mod-kararlari.png)
+
+#### Manuel Kontrol ve Güven Kararları
+
+![Manuel kontrol ve güven kararları](test-results/real-benchmark/png/03-manuel-kontrol.png)
+
+#### Doluluk İyileştirmesi
+
+![Katı doğrulama kuralları korunarak elde edilen doluluk artışı](test-results/real-benchmark/png/04-doluluk-artisi.png)
 
 ---
 
