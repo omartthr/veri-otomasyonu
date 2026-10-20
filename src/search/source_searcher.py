@@ -5,8 +5,6 @@ Her eksik alan için GERÇEK canlı web sayfalarını bulmak amacıyla:
 2. DuckDuckGo / Bing / Google canlı web araması
 3. Resmî site içi derin tarama
 yöntemlerini birleştirir.
-
-Not: Gemini/AI entegrasyonu kaldırılmıştır. Tamamen kural tabanlı çalışır.
 """
 
 from __future__ import annotations
@@ -34,7 +32,6 @@ class SourceSearcher:
     """Üniversite resmî sitesinde aday URL bulucu — kural tabanlı."""
 
     def __init__(self, provider=None):
-        # provider parametresi geriye dönük uyumluluk için var; kullanılmıyor.
         pass
 
     async def discover_candidates(

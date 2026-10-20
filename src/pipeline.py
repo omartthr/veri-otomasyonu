@@ -26,7 +26,7 @@ from src.models import (
     UniversityResearchResult,
     UniversityRow,
 )
-from src.search.gemini_search import SourceSearcher
+from src.search.source_searcher import SourceSearcher
 from src.validation.rule_based_validator import evaluate_rule_based_candidate
 
 logger = logging.getLogger(__name__)

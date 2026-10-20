@@ -22,7 +22,7 @@ from src.models import (
     RowStatus,
     UniversityResearchResult,
 )
-from src.search.gemini_search import SourceSearcher
+from src.search.source_searcher import SourceSearcher
 from src.validation.rule_based_validator import evaluate_rule_based_candidate
 from src.validation.rule_validator import validate_rules
 
